@@ -13,12 +13,25 @@ exports.createPost = (req, res) => {
       });
     }
 
-    const image_url = req.file.secure_url; // URL ya subida a Cloudinary
+    // Verificar que existe la URL de Cloudinary o bien la URL de multer-storage
+    const image_url = file.secure_url || file.path || file.url;
 
+    if (!image_url) {
+      console.error("Error: No se obtuvo URL de imagen desde Cloudinary", file);
+      return res.status(500).json({
+        success: false,
+        message: "Error al procesar la imagen"
+      });
+    }
+
+    // image_url ya apunta a una URL pública válida
     postModel.createPost(user_id, image_url, caption, (err) => {
       if (err) {
-        console.error(err);
-        return res.status(500).json({ success: false });
+        console.error("Error al guardar post en BD:", err);
+        return res.status(500).json({ 
+          success: false, 
+          message: "Error al guardar el post" 
+        });
       }
 
       res.json({
@@ -29,8 +42,8 @@ exports.createPost = (req, res) => {
     
 
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false });
+    console.error("Error en createPost:", error);
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 exports.getPosts = (req, res) => {
