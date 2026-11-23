@@ -1,15 +1,15 @@
-# 🏋️ FitU — API (gym-app)
+# 🏋️ FitU — Backend (API)
 
 API REST para una aplicación de fitness con **seguimiento de comidas, análisis de calorías con IA, rutinas de entrenamiento generadas por IA** y una **red social** (posts, stories, likes y comentarios).
 
-[![CI](https://github.com/Diego0267523/gym-app/actions/workflows/ci.yml/badge.svg)](https://github.com/Diego0267523/gym-app/actions/workflows/ci.yml)
+[![CI](https://github.com/Diego0267523/fitu-backend/actions/workflows/ci.yml/badge.svg)](https://github.com/Diego0267523/fitu-backend/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![Node.js](https://img.shields.io/badge/Node.js-Express_5-339933?logo=node.js&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-mysql2-4479A1?logo=mysql&logoColor=white)
 ![Socket.io](https://img.shields.io/badge/Socket.io-realtime-010101?logo=socket.io)
 ![Tests](https://img.shields.io/badge/tests-Jest-C21325?logo=jest&logoColor=white)
 
-> El cliente web/móvil está en el repositorio [`frontend`](https://github.com/Diego0267523/frontend).
+> El cliente web/móvil está en el repositorio [`fitu-frontend`](https://github.com/Diego0267523/fitu-frontend).
 
 ## ✨ Características
 
@@ -47,8 +47,8 @@ src/
 ## 🚀 Puesta en marcha
 
 ```bash
-git clone https://github.com/Diego0267523/gym-app.git
-cd gym-app
+git clone https://github.com/Diego0267523/fitu-backend.git
+cd fitu-backend
 npm install
 cp .env.example .env   # completa tus valores
 npm start

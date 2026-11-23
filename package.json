@@ -1,5 +1,5 @@
 {
-  "name": "gym-app",
+  "name": "fitu-backend",
   "version": "1.0.0",
   "description": "API REST de FitU: comidas, calorías con IA, rutinas y red social",
   "main": "src/app.js",
@@ -11,7 +11,7 @@
   "keywords": ["fitness", "express", "mysql", "rest-api"],
   "license": "MIT",
   "author": "Diego Camacho",
-  "repository": {"type": "git", "url": "git+https://github.com/Diego0267523/gym-app.git"},
+  "repository": {"type": "git", "url": "git+https://github.com/Diego0267523/fitu-backend.git"},
   "engines": {"node": ">=18"},
   "type": "commonjs",
   "dependencies": {
