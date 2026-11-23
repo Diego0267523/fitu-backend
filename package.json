@@ -1,16 +1,18 @@
 {
   "name": "gym-app",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "API REST de FitU: comidas, calorías con IA, rutinas y red social",
+  "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
     "test": "jest",
     "test:watch": "jest --watch"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["fitness", "express", "mysql", "rest-api"],
+  "license": "MIT",
+  "author": "Diego Camacho",
+  "repository": {"type": "git", "url": "git+https://github.com/Diego0267523/gym-app.git"},
+  "engines": {"node": ">=18"},
   "type": "commonjs",
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

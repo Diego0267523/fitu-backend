@@ -1,7 +1,9 @@
-# 🏋️ Gym App — API
+# 🏋️ FitU — API (gym-app)
 
 API REST para una aplicación de fitness con **seguimiento de comidas, análisis de calorías con IA, rutinas de entrenamiento generadas por IA** y una **red social** (posts, stories, likes y comentarios).
 
+[![CI](https://github.com/Diego0267523/gym-app/actions/workflows/ci.yml/badge.svg)](https://github.com/Diego0267523/gym-app/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![Node.js](https://img.shields.io/badge/Node.js-Express_5-339933?logo=node.js&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-mysql2-4479A1?logo=mysql&logoColor=white)
 ![Socket.io](https://img.shields.io/badge/Socket.io-realtime-010101?logo=socket.io)
@@ -74,19 +76,67 @@ FRONTEND_URL=http://localhost:3000
 npm test
 ```
 
-## 📝 Endpoints principales
+## 📝 Endpoints
 
-| Método | Ruta | Descripción |
-|---|---|---|
-| POST | `/api/auth/register` | Registro de usuario |
-| POST | `/api/auth/login` | Inicio de sesión |
-| POST | `/api/food/entries` | Crear entrada de comida |
-| GET | `/api/food/entries` | Entradas del día |
-| GET | `/api/food/totals` | Totales diarios |
-| DELETE | `/api/food/entries/:id` | Eliminar entrada |
-| POST | `/api/ai/calories` | Análisis de calorías con IA |
-| POST | `/api/ai/routine` | Generar rutina |
-| POST | `/api/ai/chat` | Chat con IA |
+🔒 = requiere `Authorization: Bearer <token>` · 🔓 = público · 🔓* = token opcional
+
+Health checks: `GET /health` y `GET /status`.
+
+### Autenticación — `/api/auth`
+| Método | Ruta | Auth | Descripción |
+|---|---|---|---|
+| POST | `/register` | 🔓 | Registro de usuario |
+| POST | `/login` | 🔓 | Inicio de sesión (devuelve JWT) |
+| PUT | `/change-password` | 🔒 | Cambiar contraseña |
+| GET | `/profile` | 🔒 | Perfil del usuario autenticado |
+| PUT | `/profile/avatar` | 🔒 | Subir avatar (multipart, `avatar`) |
+| GET | `/notifications` | 🔒 | Listar notificaciones |
+| GET | `/notifications/unread` | 🔒 | Cantidad de no leídas |
+| PUT | `/notifications/:id/read` | 🔒 | Marcar una como leída |
+| PUT | `/notifications/read-all` | 🔒 | Marcar todas como leídas |
+
+### Comidas — `/api/food`
+| Método | Ruta | Auth | Descripción |
+|---|---|---|---|
+| POST | `/entries` | 🔒 | Crear entrada de comida (con imagen opcional) |
+| GET | `/entries` | 🔒 | Entradas del día |
+| GET | `/totals` | 🔒 | Totales diarios de calorías y macros |
+| GET | `/weekly-totals` | 🔒 | Totales de la semana |
+| DELETE | `/entries/:id` | 🔒 | Eliminar entrada |
+
+### IA — `/api/ai`
+| Método | Ruta | Auth | Descripción |
+|---|---|---|---|
+| POST | `/calories` | 🔒 | Estimar calorías desde una foto (multipart, `image`) |
+| POST | `/routine` | 🔒 | Generar rutina de ejercicio |
+| POST | `/chat` | 🔒 | Chat con el asistente |
+
+### Posts — `/api/posts`
+| Método | Ruta | Auth | Descripción |
+|---|---|---|---|
+| POST | `/` | 🔒 | Crear post (con imagen) |
+| GET | `/` | 🔓* | Listar posts (paginado) |
+| POST | `/:id/like` | 🔒 | Dar/quitar like |
+| GET | `/:id/comments` | 🔓 | Listar comentarios |
+| POST | `/:id/comments` | 🔒 | Comentar |
+| DELETE | `/:id` | 🔒 | Eliminar post propio |
+
+### Stories — `/api/stories`
+| Método | Ruta | Auth | Descripción |
+|---|---|---|---|
+| POST | `/` | 🔒 | Crear story (con imagen) |
+| GET | `/` | 🔓 | Stories activas |
+| GET | `/user/:userId` | 🔓 | Stories de un usuario |
+| DELETE | `/:id` | 🔒 | Eliminar story |
+
+### Entrenamientos — `/api/training`
+| Método | Ruta | Auth | Descripción |
+|---|---|---|---|
+| POST | `/create` | 🔒 | Crear entrenamiento |
+| GET | `/` | 🔒 | Listar entrenamientos |
+
+### Tiempo real (Socket.io)
+Conexión autenticada con el JWT en `auth.token`. Eventos del cliente: `join_post`, `leave_post`, `like_post`, `comment_post` y `ask_ai`. Eventos del servidor: `post_like_updated`, `post_comment_added`, `ai_response` y `ai_error`.
 
 ## 📄 Licencia
 
